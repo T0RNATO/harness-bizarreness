@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "enhanced_harnesses",
+  "key": {
+    "a": "minecraft:amethyst_shard",
+    "c": "minecraft:copper_ingot",
+    "h": "minecraft:red_harness",
+    "n": "minecraft:netherite_scrap"
+  },
+  "pattern": [
+    "aca",
+    "cnc",
+    "hca"
+  ],
+  "result": {
+    "count": 1,
+    "id": "harness_bizarreness:red_harness"
+  }
+}
