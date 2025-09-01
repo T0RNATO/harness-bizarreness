@@ -1,0 +1,28 @@
+{
+    "schemaVersion": 1,
+    "id": "harness_bizarreness",
+    "version": "${version}",
+    "name": "Harness Bizarreness",
+    "description": "Server-side mod adding ghast harnesses that increase the speed.",
+    "authors": [],
+    "contact": {},
+    "license": "MIT",
+    "icon": "icon.png",
+    "environment": "server",
+    "entrypoints": {
+        "main": [
+            "tornato.harness_bizarreness.HarnessBizarreness"
+        ],
+        "fabric-datagen": [
+            "tornato.harness_bizarreness.datagen.HarnessBizarrenessDatagen"
+        ]
+    },
+    "mixins": [
+        "harness_bizarreness.mixins.json"
+    ],
+    "depends": {
+        "fabricloader": ">=${loader_version}",
+        "fabric": "*",
+        "minecraft": "${minecraft_version}"
+    }
+}

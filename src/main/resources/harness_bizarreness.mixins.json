@@ -1,0 +1,17 @@
+{
+    "required": true,
+    "minVersion": "0.8",
+    "package": "tornato.harness_bizarreness.mixin",
+    "compatibilityLevel": "JAVA_21",
+    "mixins": [
+        "HappyGhastMixin"
+    ],
+    "client": [
+    ],
+    "injectors": {
+        "defaultRequire": 1
+    },
+    "overwrites": {
+        "requireAnnotations": true
+    }
+}
