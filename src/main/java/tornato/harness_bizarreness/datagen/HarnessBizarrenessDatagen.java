@@ -2,15 +2,17 @@ package tornato.harness_bizarreness.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
-import net.minecraft.data.recipe.RecipeExporter;
-import net.minecraft.data.recipe.RecipeGenerator;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraft.recipe.book.RecipeCategory;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.advancements.Advancement;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Recipe;
 import tornato.harness_bizarreness.HarnessItems;
 
 import java.util.List;
@@ -24,46 +26,46 @@ public class HarnessBizarrenessDatagen implements DataGeneratorEntrypoint {
     }
 
     private static class RecipeDatagen extends FabricRecipeProvider {
-        public RecipeDatagen(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+        public RecipeDatagen(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
             super(output, registriesFuture);
         }
 
         @Override
-        protected RecipeGenerator getRecipeGenerator(RegistryWrapper.WrapperLookup wrapperLookup, RecipeExporter recipeExporter) {
-            return new RecipeGenerator(wrapperLookup, recipeExporter) {
+        protected RecipeProvider createRecipeProvider(HolderLookup.Provider registries, BootstrapContext<Recipe<?>> recipes, BootstrapContext<Advancement> advancements) {
+            return new RecipeProvider(recipes, advancements) {
                 @Override
-                public void generate() {
-                    HarnessItems.ITEMS.forEach(item -> createShaped(RecipeCategory.TRANSPORTATION, item)
-                            .input('c', Items.COPPER_INGOT)
-                            .input('a', Items.AMETHYST_SHARD)
-                            .input('h', item.getPolymerItem(null, null))
-                            .input('n', Items.NETHERITE_SCRAP)
+                public void buildRecipes() {
+                    HarnessItems.ITEMS.forEach(item -> shaped(RecipeCategory.TRANSPORTATION, item)
+                            .define('c', Items.COPPER_INGOT)
+                            .define('a', Items.AMETHYST_SHARD)
+                            .define('h', item.getPolymerItem(null, null))
+                            .define('n', Items.NETHERITE_SCRAP)
                             .pattern("aca")
                             .pattern("cnc")
                             .pattern("hca")
                             .group("enhanced_harnesses")
-                            .criterion("has_harness", conditionsFromTag(ItemTags.HARNESSES))
-                            .offerTo(exporter));
+                            .unlockedBy("has_harness", has(ItemTags.HARNESSES))
+                            .save(output));
                     var dyes = List.of(
-                            Items.WHITE_DYE,
-                            Items.ORANGE_DYE,
-                            Items.MAGENTA_DYE,
-                            Items.LIGHT_BLUE_DYE,
-                            Items.YELLOW_DYE,
-                            Items.LIME_DYE,
-                            Items.PINK_DYE,
-                            Items.GRAY_DYE,
-                            Items.LIGHT_GRAY_DYE,
-                            Items.CYAN_DYE,
-                            Items.PURPLE_DYE,
-                            Items.BLUE_DYE,
-                            Items.BROWN_DYE,
-                            Items.GREEN_DYE,
-                            Items.RED_DYE,
-                            Items.BLACK_DYE
+                            Items.DYE.white(),
+                            Items.DYE.orange(),
+                            Items.DYE.magenta(),
+                            Items.DYE.lightBlue(),
+                            Items.DYE.yellow(),
+                            Items.DYE.lime(),
+                            Items.DYE.pink(),
+                            Items.DYE.gray(),
+                            Items.DYE.lightGray(),
+                            Items.DYE.cyan(),
+                            Items.DYE.purple(),
+                            Items.DYE.blue(),
+                            Items.DYE.brown(),
+                            Items.DYE.green(),
+                            Items.DYE.red(),
+                            Items.DYE.black()
                     );
                     //noinspection unchecked - I hate Java.
-                    this.offerDyeableRecipes(dyes, (List<Item>)(List<?>)HarnessItems.ITEMS, "dye_enchanced_harness", RecipeCategory.TRANSPORTATION);
+                    this.colorItemWithDye(dyes, (List<Item>)(List<?>)HarnessItems.ITEMS, "dye_enchanced_harness", RecipeCategory.TRANSPORTATION);
                 }
             };
         }
