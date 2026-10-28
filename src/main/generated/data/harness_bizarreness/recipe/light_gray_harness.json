@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "group": "enhanced_harnesses",
   "key": {
     "a": "minecraft:amethyst_shard",
@@ -14,7 +13,6 @@
     "hca"
   ],
   "result": {
-    "count": 1,
     "id": "harness_bizarreness:light_gray_harness"
   }
 }

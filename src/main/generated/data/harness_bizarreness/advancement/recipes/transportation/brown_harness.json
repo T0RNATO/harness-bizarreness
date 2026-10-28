@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "harness_bizarreness:brown_harness"
+        "recipes": "harness_bizarreness:brown_harness"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

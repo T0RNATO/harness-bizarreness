@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "category": "misc",
   "group": "dye_enchanced_harness",
   "ingredients": [
     "minecraft:green_dye",
@@ -23,7 +22,6 @@
     ]
   ],
   "result": {
-    "count": 1,
     "id": "harness_bizarreness:green_harness"
   }
 }

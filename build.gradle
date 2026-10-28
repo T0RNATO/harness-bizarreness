@@ -27,7 +27,7 @@ dependencies {
 
     implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
     implementation include("eu.pb4:polymer-core:${project.polymer_core_version}")
-    implementation include('xyz.nucleoid:server-translations-api:3.1.0+26.2')
+    implementation include("xyz.nucleoid:server-translations-api:${project.server_translations_api}")
 }
 
 processResources {
